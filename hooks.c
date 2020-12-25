@@ -42,15 +42,25 @@ static void* load_sym(char* symname, void* proxyfunc) {
 }
 typedef ssize_t (*sendto_t) (int sockfd, const void *buf, size_t len, int flags,
 			     const struct sockaddr *dest_addr, socklen_t addrlen);
+
 typedef ssize_t (*send_t) (int sockfd, const void *buf, size_t len, int flags);
-       
-typedef  ssize_t (*write_t)(int fd, const void *buf, size_t count);
+typedef ssize_t (*write_t)(int fd, const void *buf, size_t count);
+typedef ssize_t (*read_t)(int fd, void *buf, size_t count);
 
 
 sendto_t true_sendto;
 write_t true_write;
 send_t true_send;
 write_t true_write;
+read_t true_read;
+
+ssize_t read(int fd, void *buf, size_t count){
+
+    //return count;
+
+    return true_read(fd,buf,count);
+}
+
 
 ssize_t sendto(int sockfd, const void *buf, size_t len, int flags,
 	       const struct sockaddr *dest_addr, socklen_t addrlen) {
@@ -80,6 +90,7 @@ static void setup_hooks(void) {
 	SETUP_SYM(write);
 	SETUP_SYM(send);
 	SETUP_SYM(write);
+	SETUP_SYM(read);
 }
 
 
