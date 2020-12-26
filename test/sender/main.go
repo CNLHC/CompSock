@@ -39,6 +39,7 @@ func main() {
 	)
 
 	send_file := flag.String("i", "./payload", "sending payload")
+	arg_compress := flag.Bool("c", true, "sending payload")
 	flag.Parse()
 	info.PayloadFile = *send_file
 
@@ -47,7 +48,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	if conn, err = net.Dial("tcp", "localhost:2020"); err != nil {
+	if conn, err = net.Dial("tcp", "192.168.5.171:2020"); err != nil {
 		fmt.Printf("conn err %+v", err)
 		os.Exit(1)
 	}
@@ -56,20 +57,28 @@ func main() {
 	var buffer bytes.Buffer
 
 	payload, err := ioutil.ReadFile(*send_file)
+	rawBuffer := bytes.NewBuffer(payload)
 	info.TotalRead = int64(len(payload))
 	if err != nil {
 		fmt.Errorf("can not read payload %+v", err)
 		os.Exit(1)
 	}
 
-	w := zlib.NewWriter(&buffer)
-	w.Write(payload)
-	w.Close()
+	if *arg_compress {
+
+		w := zlib.NewWriter(&buffer)
+		w.Write(payload)
+		w.Close()
+	}
 
 	//perform IO
 	start := time.Now()
 	info.TotalWrite = int64(buffer.Len())
-	io.Copy(conn, &buffer)
+	if *arg_compress {
+		io.Copy(conn, &buffer)
+	} else {
+		io.Copy(conn, rawBuffer)
+	}
 	info.Elapsed = time.Since(start)
 	info.Show()
 

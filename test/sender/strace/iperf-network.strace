@@ -1,0 +1,18 @@
+socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 4
+connect(4, {sa_family=AF_INET, sin_port=htons(5201), sin_addr=inet_addr("192.168.5.172")}, 16) = 0
+getsockopt(4, SOL_TCP, TCP_MAXSEG, [1448], [4]) = 0
+socket(AF_INET, SOCK_STREAM, IPPROTO_IP) = 5
+getsockopt(5, SOL_SOCKET, SO_SNDBUF, [16384], [4]) = 0
+getsockopt(5, SOL_SOCKET, SO_RCVBUF, [131072], [4]) = 0
+connect(5, {sa_family=AF_INET, sin_port=htons(5201), sin_addr=inet_addr("192.168.5.172")}, 16) = 0
+getsockopt(5, SOL_TCP, TCP_CONGESTION, "cubic\0\0\0\0\0\0\0\0\0\0\0", [16]) = 0
+getsockname(5, {sa_family=AF_INET, sin_port=htons(60998), sin_addr=inet_addr("192.168.1.184")}, [128->16]) = 0
+getpeername(5, {sa_family=AF_INET, sin_port=htons(5201), sin_addr=inet_addr("192.168.5.172")}, [128->16]) = 0
+getsockname(5, {sa_family=AF_INET, sin_port=htons(60998), sin_addr=inet_addr("192.168.1.184")}, [128->16]) = 0
+getsockopt(5, SOL_TCP, TCP_INFO, "\1\0\0\0\0\7w\0\340\34\3\0\0\0\0\0\250\5\0\0\30\2\0\0j\0\0\0\0\0\0\0"..., [104]) = 0
+getsockopt(5, SOL_TCP, TCP_INFO, "\1\0\0\0\0\7w\0\340\34\3\0\0\0\0\0\250\5\0\0\30\2\0\0m\0\0\0\0\0\0\0"..., [104]) = 0
+getsockopt(5, SOL_TCP, TCP_INFO, "\1\0\0\0\0\7w\0\340\34\3\0\0\0\0\0\250\5\0\0\30\2\0\0g\0\0\0\0\0\0\0"..., [104]) = 0
+getsockopt(5, SOL_TCP, TCP_INFO, "\1\0\0\0\0\7w\0\340\34\3\0\0\0\0\0\250\5\0\0\30\2\0\0\\\0\0\0\0\0\0\0"..., [104]) = 0
+--- SIGINT {si_signo=SIGINT, si_code=SI_KERNEL} ---
+getsockopt(5, SOL_TCP, TCP_INFO, "\1\0\0\0\0\7w\0\340\34\3\0\0\0\0\0\250\5\0\0\30\2\0\0f\0\0\0\0\0\0\0"..., [104]) = 0
++++ exited with 1 +++

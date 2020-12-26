@@ -3,3 +3,4 @@ libhooks.so
 test-compress
 *.o
 compile_commands.json
+libgohooks.so
